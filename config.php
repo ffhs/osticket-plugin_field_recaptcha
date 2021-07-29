@@ -1,37 +1,52 @@
 <?php
 
-class reCaptchaConfig extends PluginConfig {
-    function getOptions() {
-        return array(
-            '_' => new SectionBreakField(array(
-                'label' => 'reCaptcha Configuration',
-                'hint' => 'Requires separate registration for a key set'
-            )),
-            'public' => new TextboxField(array(
+class reCaptchaConfig extends PluginConfig
+{
+    function getOptions()
+    {
+        return [
+            '_' => new SectionBreakField([
+                'hint' => 'Requires separate registration for a website under https://www.google.com/recaptcha/admin/create'
+            ]),
+            'recaptcha_verifyurl' => new TextboxField([
+                'id' => 'recaptcha_verifyurl',
+                'label' => 'Verify URL (API token validation)',
+                'hint' => 'More information under https://developers.google.com/recaptcha/docs/verify',
+                'default' => 'https://www.google.com/recaptcha/api/siteverify',
+                'configuration' => [
+                    'size' => 59,
+                    'length' => 255
+                ],
                 'required' => true,
-                'configuration'=>array('length'=>64, 'size'=>40),
-                'label' => 'Public Key',
-            )),
-            'private' => new TextboxField(array(
+            ]),
+            'recaptcha_sitekey' => new TextboxField([
+                'id' => 'recaptcha_sitekey',
+                'label' => 'Site Key',
+                'configuration' => [
+                    'size' => 59,
+                    'length' => 255
+                ],
+                'required' => true,
+            ]),
+            'recaptcha_secretkey' => new TextboxField([
+                'id' => 'recaptcha_secretkey',
+                'label' => 'Secret Key',
+                'configuration' => [
+                    'size' => 59,
+                    'length' => 255
+                ],
+                'required' => true,
                 'widget' => 'PasswordWidget',
-                'required' => false,
-                'configuration'=>array('length'=>64, 'size'=>40),
-                'label' => 'Private Key',
-            )),
-        );
+            ]),
+        ];
     }
 
-    function pre_save($config, &$errors) {
-        // Todo: verify key
-
+    function pre_save($config, &$errors)
+    {
         if (!function_exists('curl_init')) {
             Messages::error('CURL extension is required');
             return false;
         }
-
-        global $msg;
-        if (!$errors)
-            $msg = 'Successfully updated reCAPTCHA settings';
 
         return true;
     }
