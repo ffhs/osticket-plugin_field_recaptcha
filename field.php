@@ -101,16 +101,6 @@ class reCaptchaField extends FormField
             )),
         );
     }
-
-    function getMedia()
-    {
-        return array(
-            'js' => array(
-                '//www.google.com/recaptcha/api.js?hl='
-                .Internationalization::getCurrentLanguage()
-            ),
-        );
-    }
 }
 
 class reCaptchaWidget extends Widget
@@ -127,6 +117,9 @@ class reCaptchaWidget extends Widget
              data-size="<?php echo $fconfig['size'] ?: 'normal'; ?>"
         ></div>
         <?php
+
+        $widgetJsUrl = $pconfig['recaptcha_widgetjs'].'?hl='.Internationalization::getCurrentLanguage();
+        Form::emitMedia($widgetJsUrl, 'js');
     }
 
     function getValue()

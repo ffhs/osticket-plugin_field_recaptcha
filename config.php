@@ -19,6 +19,17 @@ class reCaptchaConfig extends PluginConfig
                 ],
                 'required' => true,
             ]),
+            'recaptcha_widgetjs' => new TextboxField([
+                'id' => 'recaptcha_widgetjs',
+                'label' => 'Widget JS URL (automatically render widget)',
+                'hint' => 'More information under https://developers.google.com/recaptcha/docs/display#auto_render',
+                'default' => 'https://www.google.com/recaptcha/api.js',
+                'configuration' => [
+                    'size' => 59,
+                    'length' => 255
+                ],
+                'required' => true,
+            ]),
             'recaptcha_sitekey' => new TextboxField([
                 'id' => 'recaptcha_sitekey',
                 'label' => 'Site Key',
