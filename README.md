@@ -8,7 +8,7 @@ Plugin is based on https://github.com/osTicket/osTicket-plugins/tree/01cea8dee7a
 
 ## Requirements
 
-- osTicket >=1.14.x
+- osTicket >=1.16.x
 - Google Account to register a website https://www.google.com/recaptcha/admin/create
 
 ## Installation
