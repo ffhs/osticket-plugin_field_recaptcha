@@ -52,7 +52,7 @@ class reCaptchaConfig extends PluginConfig
         ];
     }
 
-    function pre_save($config, &$errors)
+    function pre_save(&$config, &$errors)
     {
         if (!function_exists('curl_init')) {
             Messages::error('CURL extension is required');
